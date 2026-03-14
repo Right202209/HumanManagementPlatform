@@ -1,6 +1,7 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 *.class
+*.exe
 
 ### Log files ###
 *.log
