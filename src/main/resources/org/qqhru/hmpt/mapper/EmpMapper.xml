@@ -5,11 +5,6 @@
 
 <mapper namespace="org.qqhru.hmpt.mapper.EmpMapper">
 
-    <!--    List<Emp> findAll(); //查询员工-->
-    <select id="findAll" resultType="org.qqhru.hmpt.pojo.Emp">
-        select * from emp
-    </select>
-
     <delete id="delete">
         delete from emp where id in
         <foreach collection="ids" item="id" open="(" separator="," close=")">
