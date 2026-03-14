@@ -53,7 +53,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     //放行之后执行的代码
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("放行之后执行的代码 ");
+        log.debug("postHandle called after request processing");
     }
 
     //程序执行完毕后 将要返回给浏览器时候执行的代码  一般情况下 此方法用不上

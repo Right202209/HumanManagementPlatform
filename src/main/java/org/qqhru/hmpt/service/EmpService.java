@@ -1,11 +1,8 @@
 package org.qqhru.hmpt.service;
 
 import org.qqhru.hmpt.dto.EmpDto;
-import org.qqhru.hmpt.pojo.Dept;
 import org.qqhru.hmpt.pojo.Emp;
 import org.qqhru.hmpt.vo.PageResult;
-
-import java.util.List;
 
 public interface EmpService {
     //分页查询  返回值一会再改

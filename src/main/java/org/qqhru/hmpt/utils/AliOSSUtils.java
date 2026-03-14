@@ -8,8 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Component
@@ -23,6 +23,8 @@ public class AliOSSUtils {
     @Value("${aliyun.oss.bucketName}")
     private String bucketName;
 
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
     /**
      * 实现上传图片到OSS
      */
@@ -31,10 +33,11 @@ public class AliOSSUtils {
         InputStream inputStream = multipartFile.getInputStream();
 
         // 避免文件覆盖
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String format = simpleDateFormat.format(new Date());
+        String dateFolder = DATE_FORMATTER.format(LocalDate.now());
         String originalFilename = multipartFile.getOriginalFilename();
-        String fileName =format+ "/"+ System.currentTimeMillis() + originalFilename.substring(originalFilename.lastIndexOf("."));
+        int dotIndex = originalFilename != null ? originalFilename.lastIndexOf(".") : -1;
+        String extension = dotIndex >= 0 ? originalFilename.substring(dotIndex) : "";
+        String fileName = dateFolder + "/" + System.currentTimeMillis() + extension;
 
         //上传文件到 OSS
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
